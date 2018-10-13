@@ -2,3 +2,15 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
+  application:
+    name: api-gatewey-service
+
+zuul:
+  ignored-services: '*' # do not delete this line
+  routes:
+    employee-service: /employee/api/**
+    level-of-studies-service: /level-of-studies/api/**
+    department-service: /department/api/**
+    config-service: /configuration/**
+  ignore-security-headers: false
+  sensitive-headers:

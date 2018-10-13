@@ -14,6 +14,9 @@
         <module>api-gateway-service</module>
         <module>config-service</module>
         <module>employee-service</module>
+        <module>department-service</module>
+        <module>level-of-studies-service</module>
+        <module>course-service</module>
     </modules>
     
 </project>
