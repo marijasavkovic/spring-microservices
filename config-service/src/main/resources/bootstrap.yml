@@ -8,3 +8,7 @@ spring:
       server:
         native:
           search-locations: classpath:/config/
+  security:
+    user:
+      name: master
+      password: master
