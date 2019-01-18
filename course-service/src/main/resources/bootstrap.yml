@@ -6,3 +6,11 @@ spring:
       uri: http://localhost:8888
       username: master
       password: master
+  liquibase:
+    change-log: classpath:/database/db.changelog-master.xml
+custom:
+  datasource:
+      url: jdbc:mysql://localhost:3306/course_service
+      username: root
+      password: root
+      driver-class-name: java.sql.Driver

@@ -11,6 +11,8 @@ zuul:
     employee-service: /employee/api/**
     level-of-studies-service: /level-of-studies/api/**
     department-service: /department/api/**
+    user-service: /user-service/api/**
+    course-service: /course-service/api/**
     config-service: /configuration/**
   ignore-security-headers: false
   sensitive-headers:

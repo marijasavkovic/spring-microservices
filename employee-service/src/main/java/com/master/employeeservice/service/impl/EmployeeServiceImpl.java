@@ -1,5 +1,8 @@
 package com.master.employeeservice.service.impl;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.master.employeeservice.domain.EmployeeEntity;
 import com.master.employeeservice.mapper.EmployeeMapper;
 import com.master.employeeservice.model.Employee;
@@ -9,12 +12,10 @@ import com.master.employeeservice.repository.EmployeeRepository;
 import com.master.employeeservice.service.EmployeeService;
 import com.master.employeeservice.sheard.response.Response;
 import com.master.employeeservice.sheard.response.ResponseStatus;
+import com.master.employeeservice.validator.EmployeeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -22,22 +23,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapper employeeMapper;
-//    private final EmployeeValidator.Add employeeValidatorAdd;
-//    private final EmployeeValidator.Edit employeeValidatorEdit;
-//    private final EmployeeValidator.Delete employeeValidatorDelete;
+    private final EmployeeValidator.Add employeeValidatorAdd;
+    private final EmployeeValidator.Edit employeeValidatorEdit;
+    private final EmployeeValidator.Delete employeeValidatorDelete;
 
     @Autowired
     public EmployeeServiceImpl(final EmployeeRepository employeeRepository,
-                               final EmployeeMapper employeeMapper
-//                               final EmployeeValidator.Add employeeValidatorAdd,
-//                               final EmployeeValidator.Edit employeeValidatorEdit,
-//                               final EmployeeValidator.Delete employeeValidatorDelete
+                               final EmployeeMapper employeeMapper,
+                               final EmployeeValidator.Add employeeValidatorAdd,
+                               final EmployeeValidator.Edit employeeValidatorEdit,
+                               final EmployeeValidator.Delete employeeValidatorDelete
     ) {
         this.employeeRepository = employeeRepository;
         this.employeeMapper = employeeMapper;
-//        this.employeeValidatorAdd = employeeValidatorAdd;
-//        this.employeeValidatorEdit = employeeValidatorEdit;
-//        this.employeeValidatorDelete = employeeValidatorDelete;
+        this.employeeValidatorAdd = employeeValidatorAdd;
+        this.employeeValidatorEdit = employeeValidatorEdit;
+        this.employeeValidatorDelete = employeeValidatorDelete;
     }
 
     @Override
@@ -63,20 +64,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Response<?> delete(final Long employeeId) {
-//        employeeValidatorDelete.validate(employeeId);
+        employeeValidatorDelete.validate(employeeId);
         employeeRepository.deleteById(employeeId);
         return new Response<>(ResponseStatus.OK, "Employee is deleted successfully!");
     }
 
     private Employee addEmployee (EmployeeCmd employeeCmd) {
-//        employeeValidatorAdd.validate(employeeCmd);
+        employeeValidatorAdd.validate(employeeCmd);
 
         EmployeeEntity employeeEntity = employeeMapper.mapToEntity(employeeCmd);
         return employeeMapper.mapToModel(employeeRepository.save(employeeEntity));
     }
 
     private Employee editEmployee (Long employeeId, EmployeeCmd employeeCmd){
-//        employeeValidatorEdit.validate(employeeId, employeeCmd);
+        employeeValidatorEdit.validate(employeeId, employeeCmd);
 
         EmployeeEntity employeeEntity = employeeRepository.findById(employeeId)
                                                           .orElseThrow(RuntimeException::new);

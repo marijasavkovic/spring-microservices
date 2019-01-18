@@ -12,3 +12,5 @@ spring:
     user:
       name: master
       password: master
+  application:
+    name: config-service
