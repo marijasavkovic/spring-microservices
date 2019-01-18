@@ -1,4 +1,4 @@
-package com.master.authservice.validator.user;
+package com.master.authservice.validator;
 
 import java.util.ArrayList;
 import java.util.List;

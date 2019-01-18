@@ -11,7 +11,7 @@ import com.master.authservice.repository.UserRepository;
 import com.master.authservice.service.UserService;
 import com.master.authservice.sheard.response.Response;
 import com.master.authservice.sheard.response.ResponseStatus;
-import com.master.authservice.validator.user.UserValidator;
+import com.master.authservice.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
